@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smartfon Tafsilotlari</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-6">
+        <header class="text-center mb-10">
+            <h1 class="text-5xl font-bold text-blue-700 drop-shadow-md">Smartfon Tafsilotlari</h1>
+            <p class="text-lg text-gray-600 italic">Smartfon haqida batafsil ma'lumot</p>
+        </header>
+
+        <nav class="bg-gradient-to-r from-blue-500 to-indigo-600 shadow-lg p-4 mb-6 flex justify-center space-x-8 rounded-lg">
+            <a href="{% url 'smartphone_list' %}" class="text-white font-semibold hover:underline transition duration-300">📱 Smartfonlar</a>
+            <a href="/laptops/" class="text-white font-semibold hover:underline transition duration-300">💻 Noutbuklar</a>
+            <a href="/televisions/" class="text-white font-semibold hover:underline transition duration-300">📺 Televizorlar</a>
+            <a href="/aksessuars/" class="text-white font-semibold hover:underline transition duration-300">🎧 Aksessuarlar</a>
+        </nav>
+        
+        <div class="bg-white shadow-lg rounded-xl overflow-hidden max-w-3xl mx-auto p-6">
+            <div class="flex justify-center">
+                {% if smartphone.image %}
+                    <img src="{{ smartphone.image.url }}" alt="{{ smartphone.make }} {{ smartphone.model }}" class="max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl h-auto mx-auto rounded-lg shadow-md">
+                {% else %}
+                    <img src="/media/default-image.png" alt="No Image Available" class="max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl h-auto mx-auto rounded-lg shadow-md">
+                {% endif %}
+            </div>
+            <div class="p-4 text-center">
+                <h2 class="text-3xl font-semibold text-gray-800">{{ smartphone.make }} {{ smartphone.model }}</h2>
+                <p class="text-gray-600 text-lg mt-2">Rang: {{ smartphone.color }}</p>
+                <p class="text-gray-700 text-xl font-bold mt-4">Narx: ${{ smartphone.price }}</p>
+                <p class="text-gray-700 mt-4 text-justify">Tavsif: {{ smartphone.description }}</p>
+                
+                <button class="mt-6 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 text-lg font-semibold">🛒 Xarid qilish</button>
+
+                <!-- 🔹 O‘zgartirish va O‘chirish tugmalari -->
+                <div class="mt-6 flex justify-between">
+                    <a href="{% url 'smartphone_update' smartphone.id %}" class="w-5/12 bg-yellow-500 text-white py-3 rounded-lg text-center text-lg font-semibold hover:bg-yellow-600 transition duration-300">✏️ O‘zgartirish</a>
+                    <a href="{% url 'smartphone_delete' smartphone.id %}" class="w-5/12 bg-red-600 text-white py-3 rounded-lg text-center text-lg font-semibold hover:bg-red-700 transition duration-300">🗑️ O‘chirish</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
