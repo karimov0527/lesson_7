@@ -38,7 +38,7 @@ class SmartphoneForm(forms.ModelForm):
         return color
     
     
-    ``
+    
     
     
     
